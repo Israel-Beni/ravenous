@@ -8,7 +8,9 @@ class SearchBar extends React.Component {
         this.state = {
             term: '',
             location: '',
-            sortBy: 'best_match'
+            sortBy: 'best_match',
+            isTerm: false,
+            isLocation: false
         };
         this.sortByOptions = {
             'Best Match': 'best_match',
@@ -19,6 +21,8 @@ class SearchBar extends React.Component {
         this.handleTermChange = this.handleTermChange.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleEnterOnTerm = this.handleEnterOnTerm.bind(this);
+        this.handleEnterOnLocation = this.handleEnterOnLocation.bind(this);
     }
 
     getSortByClass(sortByOption){
@@ -43,19 +47,43 @@ class SearchBar extends React.Component {
 
     handleTermChange(event) {
         this.setState({
-            term: event.target.value
+            term: event.target.value,
+            isTerm: true
         })
     }
 
     handleLocationChange(event) {
         this.setState({
-            location: event.target.value
+            location: event.target.value,
+            isLocation: true
         })
     }
 
     handleSearch(event) {
         this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
         event.preventDefault();
+    }
+
+    // Handles Enter Key press on Term input field
+    handleEnterOnTerm(event) {
+        if (event.keyCode === 13) {
+            if (this.state.location) {
+                this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+            } else {
+                alert('Please enter a location.')
+            }
+        }
+    }
+
+    // Handles Enter Key press on Location input field
+    handleEnterOnLocation(event) {
+        if (event.keyCode === 13) {
+            if (this.state.term) {
+                this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+            } else {
+                alert('Please enter a term.')
+            }
+        }
     }
 
     render() {
@@ -67,8 +95,8 @@ class SearchBar extends React.Component {
                     </ul>
                 </div>
                 <div className="SearchBar-fields">
-                    <input placeholder="Search Business" onChange={this.handleTermChange} />
-                    <input placeholder="Where?" onChange={this.handleLocationChange}/>
+                    <input placeholder="Search Business" onChange={this.handleTermChange} onKeyUp={this.handleEnterOnTerm} />
+                    <input placeholder="Where?" onChange={this.handleLocationChange} onKeyUp={this.handleEnterOnLocation} />
                 </div>
                 <div className="SearchBar-submit">
                     <a onClick={this.handleSearch}>Let's Go</a>
