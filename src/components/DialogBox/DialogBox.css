@@ -1,0 +1,12 @@
+.DialogBox {
+    flex-direction: column;
+    height: 5%;
+}
+
+.DialogBox .active {
+    display: flex;
+}
+
+.DialogBox .inactive {
+    
+}
