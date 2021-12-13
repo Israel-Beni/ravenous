@@ -1,12 +1,9 @@
 .DialogBox {
+    display: none;  
     flex-direction: column;
-    height: 5%;
+    height: 10%;
 }
 
 .DialogBox .active {
     display: flex;
-}
-
-.DialogBox .inactive {
-    
 }

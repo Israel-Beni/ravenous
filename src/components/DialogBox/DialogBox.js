@@ -12,10 +12,10 @@ class DialogBox extends React.Component {
     }
 
     changeVisibility() {
-        this.state.class_name === 'DialogBox-container active' ? this.setState({
-            class_name: 'DialogBox-container'
+        this.state.class_name === 'DialogBox active' ? this.setState({
+            class_name: 'DialogBox'
         }) : this.setState({
-            class_name: 'DialogBox-container active'
+            class_name: 'DialogBox active'
         });
     }
 
@@ -27,7 +27,7 @@ class DialogBox extends React.Component {
     render() {
         return (
             <div className="DialogBox">
-                <div className={this.state.class_name}>
+                <div className={this.props.class_name}>
                     <h3 className="title">{this.props.title}</h3>
                     <p className="message">{this.props.message}</p>
                     <div className="action">
