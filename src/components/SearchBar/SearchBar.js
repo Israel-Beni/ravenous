@@ -9,10 +9,10 @@ class SearchBar extends React.Component {
         this.state = {
             term: '',
             location: '',
-            sortBy: 'best_match'
+            sortBy: 'best_match',
+            isTerm: false,
+            isLocation: false
         };
-        this.isTerm = false;
-        this.isLocation = false;
         this.dialogBoxInfo = {
             class_name: '',
             title: '',
@@ -30,6 +30,8 @@ class SearchBar extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.handleEnterOnTerm = this.handleEnterOnTerm.bind(this);
         this.handleEnterOnLocation = this.handleEnterOnLocation.bind(this);
+        this.isTerm = this.isTerm.bind(this);
+        this.isLocation = this.isLocation.bind(this);
     }
 
     getSortByClass(sortByOption){
@@ -46,7 +48,7 @@ class SearchBar extends React.Component {
     renderSortByOptions() {
         return Object.keys(this.sortByOptions).map( sortByOption =>  {
             const sortByOptionValue = this.sortByOptions[sortByOption];
-            return <li key={sortByOptionValue} 
+            return <li key={sortByOptionValue}
                        className={this.getSortByClass(sortByOptionValue)}
                        onClick={this.handleSortByChange.bind(this, sortByOptionValue)}>{sortByOption}</li>;
         });
@@ -55,14 +57,14 @@ class SearchBar extends React.Component {
     handleTermChange(event) {
         this.setState({
             term: event.target.value,
-            isTerm: true
-        })
+            isTerm: this.state.term === '' ? false : true
+        });
     }
 
     handleLocationChange(event) {
         this.setState({
             location: event.target.value,
-            isLocation: true
+            isLocation: this.state.location === '' ? false : true
         });
     }
 
@@ -71,13 +73,20 @@ class SearchBar extends React.Component {
         event.preventDefault();
     }
 
+    isTerm() {
+        return this.state.term ? true : false;
+    }
+
+    isLocation() {
+        return this.state.location ? true : false;
+    }
     // Handles Enter Key press on Term input field
     handleEnterOnTerm(event) {
         if (event.keyCode === 13) {
-            if (this.isLocation) {
+            if (this.isLocation()) {
                 this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
             } else {
-                alert("Please enter a term.");
+                alert("Please enter a location.");
                 this.dialogBoxInfo.class_name = 'DialogBox-container active';
                 this.dialogBoxInfo.title = 'Missing Search Input';
                 this.dialogBoxInfo.message = 'Please enter a location.';
@@ -88,12 +97,12 @@ class SearchBar extends React.Component {
 
     // Handles Enter Key press on Location input field
     handleEnterOnLocation(event) {
+                console.log('isTerm', this.isTerm());
         if (event.keyCode === 13) {
-            if (this.isTerm) {
-                this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
-            } else {
-                alert("Please enter a location.");
-                this.dialogBoxInfo.class_name = 'DialogBox-container active';
+            this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+            if (this.isTerm() === false) {
+                alert("Please enter a term.");
+                this.dialogBoxInfo.class_name = 'DialogBox active';
                 this.dialogBoxInfo.title = 'Missing Search Input';
                 this.dialogBoxInfo.message = 'Please enter a term.';
                 this.dialogBoxInfo.action = 'Got it!';
