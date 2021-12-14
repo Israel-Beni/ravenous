@@ -18,12 +18,14 @@ class DialogBox extends React.Component {
 
     render() {
         return (
-            <div className={`DialogBox ${this.props.visibilityState.className}`}>
-                <div>
-                    <h3 className="title">{this.props.title}</h3>
-                    <p className="message">{this.props.message}</p>
-                    <div className="action">
-                        <a onClick={this.handleClick}>{this.props.action}</a>
+            <div className={`DialogBox-container ${this.props.visibilityState.className}-DialogBox`}>
+                <div className="DialogBox">
+                    <div className="DialogBox-subcontainer">
+                        <h3 className="title">{this.props.title}</h3>
+                        <p className="message">{this.props.message}</p>
+                        <div className="action" onClick={this.handleClick}>
+                            <a>{this.props.action}</a>
+                        </div>
                     </div>
                 </div>
             </div>

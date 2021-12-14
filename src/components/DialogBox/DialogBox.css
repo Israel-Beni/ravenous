@@ -1,9 +1,61 @@
-.DialogBox {
-    display: none;
-    flex-direction: column;
-    height: 10%;
+.DialogBox-container {
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: .9;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-.active {
-    display: flex;
+.DialogBox {
+    height: 10%;
+    width: 30%;
+    margin: 0 auto;
+    background: #000000;
+    color: white;
+    z-index: 2;
+    position: fixed;
+    bottom: 4rem;
+    left: 35%;
+    top: 45%;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 1;
+}
+
+.active-DialogBox {
+    display: block;
+}
+
+.inactive-DialogBox {
+    display: none;
+}
+
+.action {
+    background: #fca800;
+    text-align: center;
+    width: 20%;
+    height: 20%;
+    border-radius: 4px;
+    margin: 5px auto;
+    position: absolute;
+    padding: auto auto;
+    bottom: 5%;
+    left: 40%;
+    z-index: 1;
+}
+
+.title {
+    background: #1b0000;
+    height: 20%;
+    padding: 7px 0;
+    z-index: 0;
+    border-radius: 4px 4px 0 0;
+}
+
+.message {
+    margin: .5rem auto;
+    font-weight: 300;
+    height: 30%;
 }
