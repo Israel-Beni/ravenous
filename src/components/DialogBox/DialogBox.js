@@ -5,29 +5,21 @@ class DialogBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            class_name: this.props.class_name
+            class_name: 'active'
         }
-        this.changeVisibility = this.changeVisibility.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
-    changeVisibility() {
-        this.state.class_name === 'DialogBox active' ? this.setState({
-            class_name: 'DialogBox'
-        }) : this.setState({
-            class_name: 'DialogBox active'
-        });
-    }
-
     handleClick(event) {
-        this.changeVisibility();
+        this.props.changeVisibility();
+        console.log('this.state.isVisible', this.state.isVisible);
         event.preventDefault();
     }
 
     render() {
         return (
-            <div className="DialogBox">
-                <div className={this.props.class_name}>
+            <div className={`DialogBox ${this.props.visibilityState.className}`}>
+                <div>
                     <h3 className="title">{this.props.title}</h3>
                     <p className="message">{this.props.message}</p>
                     <div className="action">

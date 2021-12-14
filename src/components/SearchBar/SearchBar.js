@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './SearchBar.css';
 import DialogBox from '../DialogBox/DialogBox';
 
@@ -11,19 +12,17 @@ class SearchBar extends React.Component {
             location: '',
             sortBy: 'best_match',
             isTerm: false,
-            isLocation: false
+            isLocation: false,
+            dialogBoxInfo: {},
+            isDialogBoxVisible: false,
+            dialogBoxClass: 'inactive'
         };
-        this.dialogBoxInfo = {
-            class_name: '',
-            title: '',
-            message: '',
-            action: ''
-        }
         this.sortByOptions = {
             'Best Match': 'best_match',
             'Highest Rated': 'rating',
             'Most Reviewed': 'review_count'
         };
+        this.counter = 0;
         this.handleSortByChange = this.handleSortByChange.bind(this);
         this.handleTermChange = this.handleTermChange.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);
@@ -32,6 +31,10 @@ class SearchBar extends React.Component {
         this.handleEnterOnLocation = this.handleEnterOnLocation.bind(this);
         this.isTerm = this.isTerm.bind(this);
         this.isLocation = this.isLocation.bind(this);
+        this.setDialogBox = this.setDialogBox.bind(this);
+        this.toggleDialogBoxState = this.toggleDialogBoxState.bind(this);
+        this.getVisibilityState = this.getVisibilityState.bind(this);
+        //this.checkVisibility = this.checkVisibility.bind(this);
     }
 
     getSortByClass(sortByOption){
@@ -80,6 +83,37 @@ class SearchBar extends React.Component {
     isLocation() {
         return this.state.location ? true : false;
     }
+
+    setDialogBox(title, message, action) {
+        this.setState({
+            dialogBoxInfo: {
+                title: title,
+                message: message,
+                action: action
+            }
+        });
+    }
+
+    toggleDialogBoxState() {
+        this.setState({
+            isDialogBoxVisible: !this.state.isDialogBoxVisible,
+            dialogBoxClass: this.state.dialogBoxClass === 'inactive' ? 'active' : 'inactive'
+        });
+        console.log('1');
+        console.log('isVisible', this.state.isDialogBoxVisible);
+        console.log('className', this.state.dialogBoxClass);
+    }
+
+    getVisibilityState() {
+        console.log('2');
+        console.log('isVisible', this.state.isDialogBoxVisible);
+        console.log('className', this.state.dialogBoxClass);
+        return {
+            className: this.state.dialogBoxClass,
+            isVisible: this.state.isDialogBoxVisible
+        }
+    }
+
     // Handles Enter Key press on Term input field
     handleEnterOnTerm(event) {
         if (event.keyCode === 13) {
@@ -87,29 +121,30 @@ class SearchBar extends React.Component {
                 this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
             } else {
                 alert("Please enter a location.");
-                this.dialogBoxInfo.class_name = 'DialogBox-container active';
-                this.dialogBoxInfo.title = 'Missing Search Input';
-                this.dialogBoxInfo.message = 'Please enter a location.';
-                this.dialogBoxInfo.action = 'Got it!';
+                this.setDialogBox('Missing Search Input', 'Please enter a location.', 'Got it!');
+                this.toggleDialogBoxState();
             }
         }
     }
 
     // Handles Enter Key press on Location input field
     handleEnterOnLocation(event) {
-                console.log('isTerm', this.isTerm());
         if (event.keyCode === 13) {
             this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
             if (this.isTerm() === false) {
                 alert("Please enter a term.");
-                this.dialogBoxInfo.class_name = 'DialogBox active';
-                this.dialogBoxInfo.title = 'Missing Search Input';
-                this.dialogBoxInfo.message = 'Please enter a term.';
-                this.dialogBoxInfo.action = 'Got it!';
+                this.setDialogBox('Missing Search Input', 'Please enter a term.', 'Got it!');
+                this.toggleDialogBoxState();
             }
         }
     }
-
+    /*checkVisibility(){
+        if (this.counter === 1) {
+            return true;
+        } else {
+            return DialogBox.state.isDialogBoxVisible;
+        }
+    }*/
     render() {
         return (
             <div className="SearchBar">
@@ -125,10 +160,12 @@ class SearchBar extends React.Component {
                 <div className="SearchBar-submit">
                     <a onClick={this.handleSearch}>Let's Go</a>
                 </div>
-                <DialogBox className={this.dialogBoxInfo.class_name}
-                            title={this.dialogBoxInfo.title}
-                            message={this.dialogBoxInfo.message}
-                            action={this.dialogBoxInfo.action} />
+                <DialogBox title={this.state.dialogBoxInfo.title}
+                            message={this.state.dialogBoxInfo.message}
+                            action={this.state.dialogBoxInfo.action}
+                            changeVisibility={this.toggleDialogBoxState}
+                            visibilityState={this.getVisibilityState()}
+                            />
             </div>
         );
     }
