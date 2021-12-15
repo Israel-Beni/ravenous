@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      businesses: []
+      businesses: [],
+      searchInfo: {}
     };
     this.searchYelp = this.searchYelp.bind(this);
   }
@@ -21,17 +22,23 @@ class App extends React.Component {
     Yelp.search(term, location, sortBy)
               .then(businesses => {
                 this.setState({
-                  businesses: businesses
+                  businesses: businesses,
+                  searchInfo: {
+                    term: term,
+                    location: location,
+                    sortBy: sortBy
+                  }
                 })
               });
     console.log('businesses:', this.state.businesses)
   }
+
   render() {
     return (
       <div className="App">
         <h1>ravenous</h1>
         <SearchBar searchYelp={this.searchYelp}/>
-        <BusinessList businesses={this.state.businesses} />
+        <BusinessList businesses={this.state.businesses} searchInfo={this.state.searchInfo}/>
       </div>
     );
   }
