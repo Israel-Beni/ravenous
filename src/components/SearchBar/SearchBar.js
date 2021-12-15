@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './SearchBar.css';
 import DialogBox from '../DialogBox/DialogBox';
 
@@ -73,12 +72,10 @@ class SearchBar extends React.Component {
 
     handleSearch(event) {
         if (this.isTerm() === false) {
-            alert("Please enter a location.");
-            this.setDialogBox('Missing Search Input', 'Please enter a location.', 'Got it!');
+            this.setDialogBox('Missing Search Input', 'Please enter a term.', 'Got it!');
             this.toggleDialogBoxState();
         } else if (this.isLocation() === false){
-            alert("Please enter a term.");
-            this.setDialogBox('Missing Search Input', 'Please enter a term.', 'Got it!');
+            this.setDialogBox('Missing Search Input', 'Please enter a location.', 'Got it!');
             this.toggleDialogBoxState();
         } else {
             this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
@@ -130,7 +127,7 @@ class SearchBar extends React.Component {
             if (this.isLocation()) {
                 this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
             } else {
-                alert("Please enter a location.");
+                // alert("Please enter a location.");
                 this.setDialogBox('Missing Search Input', 'Please enter a location.', 'Got it!');
                 this.toggleDialogBoxState();
             }
@@ -142,19 +139,13 @@ class SearchBar extends React.Component {
         if (event.keyCode === 13) {
             this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
             if (this.isTerm() === false) {
-                alert("Please enter a term.");
+                // alert("Please enter a term.");
                 this.setDialogBox('Missing Search Input', 'Please enter a term.', 'Got it!');
                 this.toggleDialogBoxState();
             }
         }
     }
-    /*checkVisibility(){
-        if (this.counter === 1) {
-            return true;
-        } else {
-            return DialogBox.state.isDialogBoxVisible;
-        }
-    }*/
+
     render() {
         return (
             <div className="SearchBar">
