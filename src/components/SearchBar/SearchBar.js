@@ -72,8 +72,18 @@ class SearchBar extends React.Component {
     }
 
     handleSearch(event) {
-        this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
-        event.preventDefault();
+        if (this.isTerm() === false) {
+            alert("Please enter a location.");
+            this.setDialogBox('Missing Search Input', 'Please enter a location.', 'Got it!');
+            this.toggleDialogBoxState();
+        } else if (this.isLocation() === false){
+            alert("Please enter a term.");
+            this.setDialogBox('Missing Search Input', 'Please enter a term.', 'Got it!');
+            this.toggleDialogBoxState();
+        } else {
+            this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+            event.preventDefault();
+        }
     }
 
     isTerm() {
