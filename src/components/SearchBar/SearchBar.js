@@ -33,7 +33,6 @@ class SearchBar extends React.Component {
         this.setDialogBox = this.setDialogBox.bind(this);
         this.toggleDialogBoxState = this.toggleDialogBoxState.bind(this);
         this.getVisibilityState = this.getVisibilityState.bind(this);
-        //this.checkVisibility = this.checkVisibility.bind(this);
     }
 
     getSortByClass(sortByOption){
@@ -41,18 +40,21 @@ class SearchBar extends React.Component {
 
     }
 
-    handleSortByChange(sortByOption) {
+    handleSortByChange(event, sortByOption) {
         this.setState({
             sortBy: sortByOption
         });
+        this.handleSearch(event);
     }
 
     renderSortByOptions() {
         return Object.keys(this.sortByOptions).map( sortByOption =>  {
             const sortByOptionValue = this.sortByOptions[sortByOption];
             return <li key={sortByOptionValue}
-                       className={this.getSortByClass(sortByOptionValue)}
-                       onClick={this.handleSortByChange.bind(this, sortByOptionValue)}>{sortByOption}</li>;
+                        className={this.getSortByClass(sortByOptionValue)}
+                        onClick={(event) => {
+                            this.handleSortByChange(event, sortByOptionValue)}
+                        }>{sortByOption}</li>;
         });
     }
 
