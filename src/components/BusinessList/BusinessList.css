@@ -5,6 +5,10 @@
     margin: 4.4rem;
 }
 
-.inactive {
+.BusinessList .inactive {
     display: none;
+}
+
+.BusinessList .active {
+    display: block;
 }

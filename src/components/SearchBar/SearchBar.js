@@ -104,23 +104,26 @@ class SearchBar extends React.Component {
     }
 
     toggleDialogBoxState() {
+        /*
         this.setState({
             isDialogBoxVisible: !this.state.isDialogBoxVisible,
             dialogBoxClass: this.state.dialogBoxClass === 'inactive' ? 'active' : 'inactive'
         });
         console.log('1');
         console.log('isVisible', this.state.isDialogBoxVisible);
-        console.log('className', this.state.dialogBoxClass);
+        console.log('className', this.state.dialogBoxClass);*/
+        this.props.toggleDialogBoxState();
     }
 
-    getVisibilityState() {
+    getVisibilityState() {/*
         console.log('2');
         console.log('isVisible', this.state.isDialogBoxVisible);
         console.log('className', this.state.dialogBoxClass);
         return {
             className: this.state.dialogBoxClass,
             isVisible: this.state.isDialogBoxVisible
-        }
+        }*/
+        return this.props.getDialogBoxVisibilityState();
     }
 
     // Handles Enter Key press on Term input field
@@ -157,8 +160,8 @@ class SearchBar extends React.Component {
                     </ul>
                 </div>
                 <div className="SearchBar-fields">
-                    <input placeholder="Search Business" onChange={this.handleTermChange} onKeyUp={this.handleEnterOnTerm} />
-                    <input placeholder="Where?" onChange={this.handleLocationChange} onKeyUp={this.handleEnterOnLocation} />
+                    <input id="termField" placeholder="Search Business" onChange={this.handleTermChange} onKeyUp={this.handleEnterOnTerm} />
+                    <input id="locationField" placeholder="Where?" onChange={this.handleLocationChange} onKeyUp={this.handleEnterOnLocation} />
                 </div>
                 <div className="SearchBar-submit">
                     <a onClick={this.handleSearch}>Let's Go</a>
