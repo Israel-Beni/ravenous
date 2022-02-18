@@ -1,8 +1,6 @@
 # ravenous
 
 A client-side React application, utilizing the Yelp API to search for local businesses.
-Here is a demo picture:
-![ravenous Demo](https://bn1301files.storage.live.com/y4mMQf5sCrNOS-iw564BAu2LrNhM1Y7oI5OmcY-VxssfHGMELkDIYsr4Kflp5ssYYh1kwt8J9qEmKAHGE92Wf9Y2Iov6wWm8YIYJa9j5Stb4opfNj9Vf1UKkP_GEOSeZJQpWqx4X_TBd465hqMCxKTKBZ_Pb_OKzDlbKaHTGXsYxOSLSyZ70lwZBfzhFfbvogF8?width=1930&height=1059&cropmode=none "Ravenous Demo")
 
 =========
 
@@ -41,6 +39,10 @@ The web app aims to provide a free platform with the following feature:
 This project was inspired by **Codecademy**.
 
 ## Explore the Webpage
+
+
+Here is a demo picture:
+![ravenous Demo](https://bn1301files.storage.live.com/y4mMQf5sCrNOS-iw564BAu2LrNhM1Y7oI5OmcY-VxssfHGMELkDIYsr4Kflp5ssYYh1kwt8J9qEmKAHGE92Wf9Y2Iov6wWm8YIYJa9j5Stb4opfNj9Vf1UKkP_GEOSeZJQpWqx4X_TBd465hqMCxKTKBZ_Pb_OKzDlbKaHTGXsYxOSLSyZ70lwZBfzhFfbvogF8?width=1930&height=1059&cropmode=none "Ravenous Demo")
 
 To see the live demo or the actual web app, click [here](https://israel-beni.github.io/ravenous/).
 
