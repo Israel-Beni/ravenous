@@ -7,6 +7,7 @@ A client-side React application, utilizing the Yelp API to search for local busi
 
 * [General Info](#general-info)
 * [Explore the Webpage](#explore-the-webpage)
+* [PS](#ps)
 * [Technologies](#technologies)
 * [Source](#source)
 
